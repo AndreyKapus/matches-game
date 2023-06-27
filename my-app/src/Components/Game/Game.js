@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import GameOver from '../GameOver/GameOver';
+import GameInterface from '../GameInterface/GameInterface';
 
 const Game = () => {
   const [matches, setMatches] = useState(25);
@@ -47,18 +49,9 @@ const Game = () => {
       <h2>Match Game</h2>
       {!winner && <p>Current Player: Player {currentPlayer}</p>}
       {winner ? (
-        <div>
-          <p>Game Over!</p>
-          <p>Winner: {winner}</p>
-          <button onClick={handleRestart}>Restart</button>
-        </div>
+          <GameOver winner={winner} onRestartGame={handleRestart}/>
       ) : (
-        <div>
-          <p>Matches Remaining: {matches}</p>
-          <button onClick={() => handleMatchSelection(1)}>Take 1 Match</button>
-          <button onClick={() => handleMatchSelection(2)}>Take 2 Matches</button>
-          <button onClick={() => handleMatchSelection(3)}>Take 3 Matches</button>
-        </div>
+        <GameInterface matches={matches} onHandleMachesSelection={handleMatchSelection}/>
       )}
     </div>
   );
