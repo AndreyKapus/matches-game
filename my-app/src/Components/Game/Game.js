@@ -6,10 +6,11 @@ const Game = () => {
   const [matches, setMatches] = useState(25);
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [winner, setWinner] = useState(null);
+  const [playerMatches, setPlayerMatches] = useState(null)
 
   useEffect(() => {
     if (matches === 0) {
-      setWinner(matches % 2 === 0 ? 'Player 1' : 'Player 2');
+      setWinner(matches === 0 && playerMatches % 2 === 0 ? 'You' : 'AI');
     } else if (currentPlayer === 2) {
       makeAIMove();
     }
@@ -18,6 +19,7 @@ const Game = () => {
   const handleMatchSelection = (numMatches) => {
     if (matches - numMatches >= 0 && !winner) {
       setMatches(matches - numMatches);
+      setPlayerMatches(numMatches)
       setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
     }
   };
